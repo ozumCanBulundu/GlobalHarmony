@@ -160,7 +160,7 @@ public class ViewSongsForm extends javax.swing.JInternalFrame {
                 refreshSongs();
             }
         }else{
-            JOptionPane.showMessageDialog(this, "Please select a student to delete");
+            JOptionPane.showMessageDialog(this, "Please select a song to delete");
         }
     }//GEN-LAST:event_jDeleteButtonActionPerformed
 
