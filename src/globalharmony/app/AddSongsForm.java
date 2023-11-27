@@ -178,7 +178,7 @@ public class AddSongsForm extends javax.swing.JInternalFrame {
             jAlbumField.setText(null);
             jGenreField.setText(null);
             jPopularityField.setText(null);
-                    
+            JOptionPane.showMessageDialog(this, "Song added succesfully");   
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
