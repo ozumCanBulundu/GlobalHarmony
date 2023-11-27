@@ -4,6 +4,8 @@
  */
 package globalharmony.Bo;
 
+import java.util.Vector;
+
 /**
  *
  * @author ozumc
@@ -14,15 +16,26 @@ public class Song {
     private int sYear;
     private String sGenre;
     private String sAlbum;
-    private String sPopularity;
+    private int sPopularity;
 
-    public Song(String sName, String sLang, int sYear, String sGenre, String sAlbum, String sPopularity) {
+    public Song(String sName, String sLang, int sYear, String sGenre, String sAlbum, int sPopularity) {
         this.sName = sName;
         this.sLang = sLang;
         this.sYear = sYear;
         this.sGenre = sGenre;
         this.sAlbum = sAlbum;
         this.sPopularity = sPopularity;
+    }
+    
+    public Vector getRow(){
+        Vector vec = new Vector();
+        vec.add(this.sName);
+        vec.add(this.sLang);
+        vec.add(this.sYear);
+        vec.add(this.sGenre);
+        vec.add(this.sAlbum);
+        vec.add(this.sPopularity);
+        return vec;
     }
 
     public String getsName() {
@@ -65,11 +78,11 @@ public class Song {
         this.sAlbum = sAlbum;
     }
 
-    public String getsPopularity() {
+    public int getsPopularity() {
         return sPopularity;
     }
 
-    public void setsPopularity(String sPopularity) {
+    public void setsPopularity(int sPopularity) {
         this.sPopularity = sPopularity;
     }
     

@@ -15,11 +15,9 @@ public class User {
     private String username;
     private String password;
 
-    public User(String name, int id, String username, String password) {
+    public User(String name, int id) {
         this.name = name;
         this.id = id;
-        this.username = username;
-        this.password = password;
     }
 
     public String getName() {

@@ -8,8 +8,6 @@ import globalharmony.util.GlobalData;
 import java.beans.PropertyVetoException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 
 
@@ -44,7 +42,7 @@ public class MainForm extends javax.swing.JFrame {
 
     
     private void showForm(String name, boolean checkLogin){
-        if (checkLogin && GlobalData.stf == null) {
+        if (checkLogin && GlobalData.user == null) {
             //Check for authorization here
             showForm("loginForm", false);
         } else {
@@ -55,14 +53,13 @@ public class MainForm extends javax.swing.JFrame {
                 }
                 forms.get(name).show();
                 forms.get(name).setSelected(true);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (PropertyVetoException | IllegalAccessException | InstantiationException ex) {
             }
         }
     }
     
     private void showForm(String frmName) {
-        showForm(frmName, false);
+        showForm(frmName, true);
     }
 
     /**
@@ -75,6 +72,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jFileMenu = new javax.swing.JMenu();
         jMenuItemLogin = new javax.swing.JMenuItem();
@@ -82,27 +80,43 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItemExit = new javax.swing.JMenuItem();
         jManageMenu = new javax.swing.JMenu();
         jSongMenu = new javax.swing.JMenu();
-        jMenuItemStudentAdd = new javax.swing.JMenuItem();
-        jMenuItemStudentDelete = new javax.swing.JMenuItem();
-        jMenuItemStudentUpdate = new javax.swing.JMenuItem();
-        jMenuItemStudentView = new javax.swing.JMenuItem();
+        jMenuItemSongsView = new javax.swing.JMenuItem();
+        jMenuItemSongsAdd = new javax.swing.JMenuItem();
+        jMenuItemSongsDelete = new javax.swing.JMenuItem();
+        jMenuItemSongsUpdate = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ozumc\\Downloads\\Untitled.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1))
         );
 
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
 
-        jFileMenu.setText("File");
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuBar1.setMinimumSize(new java.awt.Dimension(93, 80));
+
+        jFileMenu.setText("Profile");
+        jFileMenu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jFileMenu.setHideActionText(true);
 
         jMenuItemLogin.setText("Login");
         jMenuItemLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -125,41 +139,44 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jFileMenu);
 
-        jManageMenu.setText("Manage");
+        jManageMenu.setText("Library");
+        jManageMenu.setAutoscrolls(true);
+        jManageMenu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jManageMenu.setMargin(new java.awt.Insets(15, 6, 15, 6));
 
-        jSongMenu.setText("Song");
+        jSongMenu.setText("My Songs");
 
-        jMenuItemStudentAdd.setText("Add");
-        jMenuItemStudentAdd.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSongsView.setText("View");
+        jMenuItemSongsView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemStudentAddActionPerformed(evt);
+                jMenuItemSongsViewActionPerformed(evt);
             }
         });
-        jSongMenu.add(jMenuItemStudentAdd);
+        jSongMenu.add(jMenuItemSongsView);
 
-        jMenuItemStudentDelete.setText("Delete");
-        jMenuItemStudentDelete.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSongsAdd.setText("Add");
+        jMenuItemSongsAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemStudentDeleteActionPerformed(evt);
+                jMenuItemSongsAddActionPerformed(evt);
             }
         });
-        jSongMenu.add(jMenuItemStudentDelete);
+        jSongMenu.add(jMenuItemSongsAdd);
 
-        jMenuItemStudentUpdate.setText("Update");
-        jMenuItemStudentUpdate.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSongsDelete.setText("Delete");
+        jMenuItemSongsDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemStudentUpdateActionPerformed(evt);
+                jMenuItemSongsDeleteActionPerformed(evt);
             }
         });
-        jSongMenu.add(jMenuItemStudentUpdate);
+        jSongMenu.add(jMenuItemSongsDelete);
 
-        jMenuItemStudentView.setText("View");
-        jMenuItemStudentView.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSongsUpdate.setText("Update");
+        jMenuItemSongsUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemStudentViewActionPerformed(evt);
+                jMenuItemSongsUpdateActionPerformed(evt);
             }
         });
-        jSongMenu.add(jMenuItemStudentView);
+        jSongMenu.add(jMenuItemSongsUpdate);
 
         jManageMenu.add(jSongMenu);
 
@@ -174,25 +191,25 @@ public class MainForm extends javax.swing.JFrame {
         //showForm("addSongsForm");
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
-    private void jMenuItemStudentAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStudentAddActionPerformed
+    private void jMenuItemSongsAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSongsAddActionPerformed
         showForm("addSongsForm");
-    }//GEN-LAST:event_jMenuItemStudentAddActionPerformed
+    }//GEN-LAST:event_jMenuItemSongsAddActionPerformed
 
-    private void jMenuItemStudentDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStudentDeleteActionPerformed
-        //showForm("addSongsForm");
-    }//GEN-LAST:event_jMenuItemStudentDeleteActionPerformed
-
-    private void jMenuItemStudentUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStudentUpdateActionPerformed
-        //showForm("addSongsForm");
-    }//GEN-LAST:event_jMenuItemStudentUpdateActionPerformed
-
-    private void jMenuItemStudentViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStudentViewActionPerformed
+    private void jMenuItemSongsDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSongsDeleteActionPerformed
         showForm("viewSongsForm");
-    }//GEN-LAST:event_jMenuItemStudentViewActionPerformed
+    }//GEN-LAST:event_jMenuItemSongsDeleteActionPerformed
+
+    private void jMenuItemSongsUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSongsUpdateActionPerformed
+        //showForm("addSongsForm");
+    }//GEN-LAST:event_jMenuItemSongsUpdateActionPerformed
 
     private void jMenuItemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoginActionPerformed
         showForm("loginForm");
     }//GEN-LAST:event_jMenuItemLoginActionPerformed
+
+    private void jMenuItemSongsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSongsViewActionPerformed
+        showForm("viewSongsForm");
+    }//GEN-LAST:event_jMenuItemSongsViewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,15 +251,16 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jFileMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jManageMenu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemLogin;
     private javax.swing.JMenuItem jMenuItemLogout;
-    private javax.swing.JMenuItem jMenuItemStudentAdd;
-    private javax.swing.JMenuItem jMenuItemStudentDelete;
-    private javax.swing.JMenuItem jMenuItemStudentUpdate;
-    private javax.swing.JMenuItem jMenuItemStudentView;
+    private javax.swing.JMenuItem jMenuItemSongsAdd;
+    private javax.swing.JMenuItem jMenuItemSongsDelete;
+    private javax.swing.JMenuItem jMenuItemSongsUpdate;
+    private javax.swing.JMenuItem jMenuItemSongsView;
     private javax.swing.JMenu jSongMenu;
     // End of variables declaration//GEN-END:variables
 

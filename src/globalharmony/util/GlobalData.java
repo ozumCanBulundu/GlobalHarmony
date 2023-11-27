@@ -4,12 +4,13 @@
  */
 package globalharmony.util;
 
-import globalharmony.Bo.Staff;
+
+import globalharmony.Bo.User;
 
 /**
  *
  * @author ozumc
  */
 public class GlobalData {
-    public static Staff stf = null;
+    public static User user = null;
 }

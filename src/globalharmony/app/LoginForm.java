@@ -4,6 +4,11 @@
  */
 package globalharmony.app;
 
+import globalharmony.Bo.User;
+import globalharmony.Dao.StaffHandler;
+import javax.swing.JOptionPane;
+import globalharmony.util.GlobalData;
+
 /**
  *
  * @author ozumc
@@ -26,24 +31,88 @@ public class LoginForm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jUsernameLabel = new javax.swing.JLabel();
+        jUsernameField = new javax.swing.JTextField();
+        jPasswordLabel = new javax.swing.JLabel();
+        jPasswordField = new javax.swing.JPasswordField();
+        jLoginButton = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setTitle("Login");
+
+        jUsernameLabel.setText("Username");
+
+        jPasswordLabel.setText("Password");
+
+        jLoginButton.setText("Login");
+        jLoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLoginButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLoginButton)
+                .addGap(60, 60, 60))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jUsernameLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(jPasswordLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jUsernameField)
+                            .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jUsernameLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jUsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(jPasswordLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(jLoginButton)
+                .addGap(38, 38, 38))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginButtonActionPerformed
+        String username = jUsernameField.getText();
+        String password = new String(jPasswordField.getPassword());
+        User user = new StaffHandler().login(username, password); 
+        if(user != null){
+            GlobalData.user = user;
+            this.dispose();
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Incorrect username and password");
+        }
+    }//GEN-LAST:event_jLoginButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jLoginButton;
+    private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JLabel jPasswordLabel;
+    private javax.swing.JTextField jUsernameField;
+    private javax.swing.JLabel jUsernameLabel;
     // End of variables declaration//GEN-END:variables
 }
