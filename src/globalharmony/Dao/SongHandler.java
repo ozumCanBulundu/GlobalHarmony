@@ -40,7 +40,7 @@ public class SongHandler {
                 String sName = rs.getString("sName");
                 String sLang = rs.getString("SLang");
                 int sYear = rs.getInt("sYear");
-                String sGenre = rs.getString("sAlbum");
+                String sGenre = rs.getString("sGenre");
                 String sAlbum = rs.getString("sAlbum");
                 int sPopularity = rs.getInt("sPopularity");
                 Song s = new Song(sName,sLang, sYear, sGenre, sAlbum, sPopularity);
