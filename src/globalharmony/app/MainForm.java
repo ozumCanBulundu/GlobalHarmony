@@ -27,12 +27,16 @@ public class MainForm extends javax.swing.JFrame {
     ViewSongsForm viewSongsForm = new ViewSongsForm();
     
     Map <String, JInternalFrame> forms = new HashMap<>();
+    Map <String, Boolean> userAuthentication = new HashMap<>();
     
     public MainForm() {
         initComponents();
         forms.put("loginForm", loginForm);
         forms.put("addSongsForm", addSongsForm);
         forms.put("viewSongsForm", viewSongsForm);
+        userAuthentication.put("addSongsForm", Boolean.TRUE);
+        userAuthentication.put("viewSongsForm", Boolean.TRUE);
+        
         
         forms.keySet().forEach(key->{
             jDesktopPane1.add(forms.get(key));

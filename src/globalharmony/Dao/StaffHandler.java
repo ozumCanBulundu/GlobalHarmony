@@ -5,6 +5,7 @@
 package globalharmony.Dao;
 
 import globalharmony.Bo.User;
+import globalharmony.util.PasswordEncryptor;
 import globalharmony.util.SQLUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +26,7 @@ public class StaffHandler {
     
     public User login(String username, String password){
         User user = null;
+        password=PasswordEncryptor.encryptPassword(password);
 
         try {
             String cmd = String.format("SELECT name,Id,userName,password FROM User WHERE username='%s' and password ='%s'",username,password);
