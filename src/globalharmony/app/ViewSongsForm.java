@@ -21,24 +21,31 @@ public class ViewSongsForm extends javax.swing.JInternalFrame {
      */
     
     private SongHandler songHandler = new SongHandler();
+    public List<Song> songs;
     
     private void refreshSongs(){
         Songs();
     }
     
-    
+
     private void Songs(){
         String keyword = jSearchField.getText();
-        List<Song> songs = songHandler.loadSong(keyword);
+        songs = songHandler.loadSong(keyword);
         String columns[] = new String[]{"Name","Language","Year","Genre","Album","Popularity"};
-        DefaultTableModel tblModel = new DefaultTableModel(columns,0);
-        songs.forEach((song) ->{
-            tblModel.addRow(song.getRow());
-        });
-        jTableSong.setModel(tblModel);
+        DefaultTableModel tblModel = new DefaultTableModel(columns,0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        }
+    };
         
-    }
-    public ViewSongsForm() {
+        songs.forEach((song) ->{
+        tblModel.addRow(song.getRow());
+        });
+        jTableSong.setModel(tblModel); 
+        
+    }  
+    public ViewSongsForm() {    
         initComponents();
         Songs();
     }
@@ -90,6 +97,11 @@ public class ViewSongsForm extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableSong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableSongMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableSong);
 
         jDeleteButton.setText("Delete");
@@ -167,6 +179,19 @@ public class ViewSongsForm extends javax.swing.JInternalFrame {
     private void jSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchButtonActionPerformed
         Songs();
     }//GEN-LAST:event_jSearchButtonActionPerformed
+
+    private void jTableSongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSongMouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2) {
+             Song song = songs.get(jTableSong.getSelectedRow());
+             UpdateForm updateForm = new UpdateForm(null,true);
+             updateForm.setSong(song);
+             updateForm.setVisible(true);
+             if (updateForm.check == true) {
+                 refreshSongs();
+             }
+        }
+    }//GEN-LAST:event_jTableSongMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

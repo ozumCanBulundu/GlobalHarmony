@@ -29,6 +29,12 @@ public class SongHandler {
         return sqlUtil.executeUpdate(cmd);
     }
     
+    public int UpdateSong(String sName, String sLanguage, int year, String sGenre, String Album,int sPopularity){
+        String cmdTemplate = "update Song set sName='%s',SLang = '%s',sYear = %d, sGenre = '%s', sAlbum = '%s', sPopularity = %d where sName = '%s'";
+        String cmd = String.format(cmdTemplate,sName,sLanguage,year,sGenre,Album,sPopularity,sName);
+        return sqlUtil.executeUpdate(cmd);
+    }
+    
     public List<Song> loadSong(String keyword){
         
             List<Song> songs = new ArrayList<>();
