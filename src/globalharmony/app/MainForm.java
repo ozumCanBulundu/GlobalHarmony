@@ -87,7 +87,6 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItemSongsView = new javax.swing.JMenuItem();
         jMenuItemSongsAdd = new javax.swing.JMenuItem();
         jMenuItemSongsDelete = new javax.swing.JMenuItem();
-        jMenuItemSongsUpdate = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,14 +173,6 @@ public class MainForm extends javax.swing.JFrame {
         });
         jSongMenu.add(jMenuItemSongsDelete);
 
-        jMenuItemSongsUpdate.setText("Update");
-        jMenuItemSongsUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemSongsUpdateActionPerformed(evt);
-            }
-        });
-        jSongMenu.add(jMenuItemSongsUpdate);
-
         jManageMenu.add(jSongMenu);
 
         jMenuBar1.add(jManageMenu);
@@ -202,10 +193,6 @@ public class MainForm extends javax.swing.JFrame {
     private void jMenuItemSongsDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSongsDeleteActionPerformed
         showForm("viewSongsForm");
     }//GEN-LAST:event_jMenuItemSongsDeleteActionPerformed
-
-    private void jMenuItemSongsUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSongsUpdateActionPerformed
-        //showForm("addSongsForm");
-    }//GEN-LAST:event_jMenuItemSongsUpdateActionPerformed
 
     private void jMenuItemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoginActionPerformed
         showForm("loginForm");
@@ -263,7 +250,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemLogout;
     private javax.swing.JMenuItem jMenuItemSongsAdd;
     private javax.swing.JMenuItem jMenuItemSongsDelete;
-    private javax.swing.JMenuItem jMenuItemSongsUpdate;
     private javax.swing.JMenuItem jMenuItemSongsView;
     private javax.swing.JMenu jSongMenu;
     // End of variables declaration//GEN-END:variables
