@@ -1,5 +1,4 @@
 # GlobalHarmony
 
 
-Global Harmony is a Database management system. It can be used for sharing different kinds of musics with friends, family and world!
- 
+Global Harmony is a Database Management System. It can be used for sharing different kinds of music with friends, family, and the world! 
